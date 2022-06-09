@@ -1,0 +1,10 @@
+FoodID,Name,Product Number,food country,FoodCategoryID
+1,tai rice with  vegetables,AR-5381,Thailand,1
+3,steamed rice served with  salad,DR-5378,Japanese,1
+5,Sri Lankan fish curry,SDE-5309,Sri Lankan,3
+6,Gluten-Free Meal,AR-484,Sri Lankan,2
+21,ÿfive-spice chicken curry with pasta saladÿ,DR-5385,China,1
+32,Pan seared salmon steak,SDE-5386,Thailand,3
+40,Low Fat Meal,DR-387,China,2
+45,Sri Lankan special,SDE-5388,Sri Lankan,3
+66,Kosher meal,AR-5389,Thailand,2

@@ -1,0 +1,10 @@
+FlightID,flight_distance,departure_delay_in_minutes,arrival_delay_in_minutes
+123,460,25,18
+124,235,1,6
+135,1142,0,0
+201,562,11,9
+233,214,0,0
+245,1180,0,0
+345,1276,9,23
+380,2035,4,0
+399,853,0,0
