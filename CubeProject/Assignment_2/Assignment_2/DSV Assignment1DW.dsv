@@ -1,0 +1,235 @@
+﻿<DataSourceView xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:ddl300="http://schemas.microsoft.com/analysisservices/2011/engine/300" xmlns:ddl300_300="http://schemas.microsoft.com/analysisservices/2011/engine/300/300" xmlns:ddl400="http://schemas.microsoft.com/analysisservices/2012/engine/400" xmlns:ddl400_400="http://schemas.microsoft.com/analysisservices/2012/engine/400/400" xmlns:ddl500="http://schemas.microsoft.com/analysisservices/2013/engine/500" xmlns:ddl500_500="http://schemas.microsoft.com/analysisservices/2013/engine/500/500" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="ca118925-a2a7-4e3c-850d-8b846d92631f" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DSV Assignment1DW</ID>
+  <Name>DSV Assignment1DW</Name>
+  <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+  <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+  <Annotations>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:ShowFriendlyNames</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:CurrentLayout</Name>
+      <Value>_ALL_TABLES_</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:SchemaRestriction</Name>
+      <Value></Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:RetrieveRelationships</Name>
+      <Value>true</Value>
+    </Annotation>
+    <Annotation>
+      <Name>http://schemas.microsoft.com/DataWarehouse/Designer/1.0:Layouts</Name>
+      <Value>
+        <Layouts xmlns="">
+          <Diagram>
+            <Name>_ALL_TABLES_</Name>
+            <DiagramLayout />
+            <ShowRelationshipNames>False</ShowRelationshipNames>
+            <UseDiagramDefaultLayout>True</UseDiagramDefaultLayout>
+            <DiagramViewPortLeft>0</DiagramViewPortLeft>
+            <DiagramViewPortTop>0</DiagramViewPortTop>
+            <DiagramBoundingLeft>0</DiagramBoundingLeft>
+            <DiagramBoundingTop>0</DiagramBoundingTop>
+            <DiagramZoom>100</DiagramZoom>
+          </Diagram>
+        </Layouts>
+      </Value>
+    </Annotation>
+  </Annotations>
+  <DataSourceID>DS_Assignment1_DW</DataSourceID>
+  <Schema>
+    <xs:schema id="DSV_x0020_Assignment1DW" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+      <xs:element name="DSV_x0020_Assignment1DW" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:design-time-name="388011c4-5c1b-42d2-9a5a-7be4244e9a23">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="dbo_DimFlight" msprop:design-time-name="ecb84321-ab74-46c6-9098-787f3bb22680" msprop:DbTableName="DimFlight" msprop:FriendlyName="DimFlight" msprop:DbSchemaName="dbo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="FlightIDSK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="11665cee-bd40-45ca-9647-c1195a0c9f6f" msprop:DbColumnName="FlightIDSK" msprop:FriendlyName="FlightIDSK" type="xs:int" />
+                  <xs:element name="FlightAlternateID" msprop:design-time-name="058a40f5-ac54-411b-83f4-054db374e067" msprop:DbColumnName="FlightAlternateID" msprop:FriendlyName="FlightAlternateID" type="xs:int" minOccurs="0" />
+                  <xs:element name="distance" msprop:design-time-name="2488c2cb-7e0c-40d7-84f1-294ca1c26f4a" msprop:DbColumnName="distance" msprop:FriendlyName="distance" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Departuredelayinminutes" msprop:design-time-name="1a6326a1-7a42-4068-a062-2161fffb9f9b" msprop:DbColumnName="Departuredelayinminutes" msprop:FriendlyName="Departuredelayinminutes" type="xs:int" minOccurs="0" />
+                  <xs:element name="Arrivaldelayinminutes" msprop:design-time-name="c51b76ef-07b1-494e-8882-fdb2cdf78b08" msprop:DbColumnName="Arrivaldelayinminutes" msprop:FriendlyName="Arrivaldelayinminutes" type="xs:int" minOccurs="0" />
+                  <xs:element name="insertDate" msprop:design-time-name="b01c6a7e-054a-4d5b-a8f8-065f0923d06e" msprop:DbColumnName="insertDate" msprop:FriendlyName="insertDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="modifydate" msprop:design-time-name="cb9cd432-923d-41ed-a6bc-b359fc27885e" msprop:DbColumnName="modifydate" msprop:FriendlyName="modifydate" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_DimFoodCategory" msprop:design-time-name="025b3730-cc36-49ee-a8b4-0f5bbfdf95b3" msprop:DbTableName="DimFoodCategory" msprop:FriendlyName="DimFoodCategory" msprop:DbSchemaName="dbo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="CategoryIDSK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="6f093725-d0f4-40d5-9a78-b6b95352d4c8" msprop:DbColumnName="CategoryIDSK" msprop:FriendlyName="CategoryIDSK" type="xs:int" />
+                  <xs:element name="CategoryAlternateID" msprop:design-time-name="68271c4d-7248-4d7a-abed-ec5a73f0f69b" msprop:DbColumnName="CategoryAlternateID" msprop:FriendlyName="CategoryAlternateID" type="xs:int" minOccurs="0" />
+                  <xs:element name="categoryname" msprop:design-time-name="fea57045-dd0e-4bab-90e2-6ea260424e62" msprop:DbColumnName="categoryname" msprop:FriendlyName="categoryname" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="insertDate" msprop:design-time-name="6c5f2f5c-c865-46c4-a2be-7cd3c2deab87" msprop:DbColumnName="insertDate" msprop:FriendlyName="insertDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="modifydate" msprop:design-time-name="8d9bde5f-cda8-47e9-b212-0c3b06c5a353" msprop:DbColumnName="modifydate" msprop:FriendlyName="modifydate" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_DimFoodItem" msprop:design-time-name="4865260e-2dff-44ca-b48b-6573f0259c93" msprop:DbTableName="DimFoodItem" msprop:FriendlyName="DimFoodItem" msprop:DbSchemaName="dbo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="FoodIDSK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="e2d513ff-bf10-44dd-8007-f75b18f2b7ce" msprop:DbColumnName="FoodIDSK" msprop:FriendlyName="FoodIDSK" type="xs:int" />
+                  <xs:element name="FoodAlternateID" msprop:design-time-name="292787f5-7332-455c-8be6-22fc30231e21" msprop:DbColumnName="FoodAlternateID" msprop:FriendlyName="FoodAlternateID" type="xs:int" minOccurs="0" />
+                  <xs:element name="name" msprop:design-time-name="608ba70e-838d-472f-bb42-3f7d5a119dc5" msprop:DbColumnName="name" msprop:FriendlyName="name" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="ProductNumber" msprop:design-time-name="b6a44643-05bf-4a12-8284-c3ad45d9c0c2" msprop:DbColumnName="ProductNumber" msprop:FriendlyName="ProductNumber" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="foodcountry" msprop:design-time-name="3c2a76b4-091a-48b0-8e12-ac4621a5357e" msprop:DbColumnName="foodcountry" msprop:FriendlyName="foodcountry" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Categorykey" msprop:design-time-name="b0fb3b8d-4c2d-491b-8387-584bfc6bf498" msprop:DbColumnName="Categorykey" msprop:FriendlyName="Categorykey" type="xs:int" minOccurs="0" />
+                  <xs:element name="insertDate" msprop:design-time-name="ef0f374a-d5ba-4871-9ab0-a6fc697dadff" msprop:DbColumnName="insertDate" msprop:FriendlyName="insertDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="modifydate" msprop:design-time-name="960ba34b-5a99-4657-88da-5e6086fc3ffa" msprop:DbColumnName="modifydate" msprop:FriendlyName="modifydate" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_DimSatisfaction" msprop:design-time-name="de5cbaf8-ca9c-4c48-811d-b9215f85bb6c" msprop:DbTableName="DimSatisfaction" msprop:FriendlyName="DimSatisfaction" msprop:DbSchemaName="dbo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="SatisfactionIDSK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="92a274a5-3bed-44e4-8584-3ef524aa277d" msprop:DbColumnName="SatisfactionIDSK" msprop:FriendlyName="SatisfactionIDSK" type="xs:int" />
+                  <xs:element name="SatisfactionAlternateID" msprop:design-time-name="b263e6c9-e2de-4d30-b2f4-b2398e27cd36" msprop:DbColumnName="SatisfactionAlternateID" msprop:FriendlyName="SatisfactionAlternateID" type="xs:int" minOccurs="0" />
+                  <xs:element name="satisfactiondescription" msprop:design-time-name="31890b65-ad52-4c1b-8772-61db3f385f7b" msprop:DbColumnName="satisfactiondescription" msprop:FriendlyName="satisfactiondescription" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="insertdate" msprop:design-time-name="d2060435-06d3-464c-a600-c01488ebeae6" msprop:DbColumnName="insertdate" msprop:FriendlyName="insertdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="modifydate" msprop:design-time-name="a2c55cbd-ce0f-4654-aefb-7216215e6b3f" msprop:DbColumnName="modifydate" msprop:FriendlyName="modifydate" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="dbo_FactPassengers" msprop:design-time-name="ffa7ae0f-9735-49a1-aee6-d549718da9e8" msprop:DbTableName="FactPassengers" msprop:FriendlyName="FactPassengers" msprop:DbSchemaName="dbo" msprop:TableType="Table">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PassengerIDSK" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:design-time-name="c0293961-caf6-4830-9a72-1cb7829e6bce" msprop:DbColumnName="PassengerIDSK" msprop:FriendlyName="PassengerIDSK" type="xs:int" />
+                  <xs:element name="PassengerAlternateID" msprop:design-time-name="0dc7b09d-0aa8-4c07-91c6-f7c61f9fbd4e" msprop:DbColumnName="PassengerAlternateID" msprop:FriendlyName="PassengerAlternateID" type="xs:int" minOccurs="0" />
+                  <xs:element name="age" msprop:design-time-name="61a55e51-cd41-4d1c-a2d5-0561d37e4f2a" msprop:DbColumnName="age" msprop:FriendlyName="age" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="Gender" msprop:design-time-name="6fa6f507-ccc6-4de0-9db6-66d2f4e183f7" msprop:DbColumnName="Gender" msprop:FriendlyName="Gender" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="passengerclass" msprop:design-time-name="56237b62-ffd5-4a05-86b2-d21ef642b719" msprop:DbColumnName="passengerclass" msprop:FriendlyName="passengerclass" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="passengertype" msprop:design-time-name="cde3e1eb-1dd8-4c23-a873-69d40cd5361f" msprop:DbColumnName="passengertype" msprop:FriendlyName="passengertype" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="typeoftravel" msprop:design-time-name="4e5ae1a2-1a1b-4be4-b0a5-6bc2472e66fa" msprop:DbColumnName="typeoftravel" msprop:FriendlyName="typeoftravel" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="FlightKey" msprop:design-time-name="abbbee49-b51e-466e-aea5-8df4d98950f1" msprop:DbColumnName="FlightKey" msprop:FriendlyName="FlightKey" type="xs:int" minOccurs="0" />
+                  <xs:element name="FoodKey" msprop:design-time-name="25030dda-b5d5-438e-968b-f557af93bc33" msprop:DbColumnName="FoodKey" msprop:FriendlyName="FoodKey" type="xs:int" minOccurs="0" />
+                  <xs:element name="SatisfactionKey" msprop:design-time-name="7a297fff-5802-4e16-b00f-39d977d7567b" msprop:DbColumnName="SatisfactionKey" msprop:FriendlyName="SatisfactionKey" type="xs:int" minOccurs="0" />
+                  <xs:element name="passengerAddress" msprop:design-time-name="cb74fc42-229e-4767-8efb-82508f756e3f" msprop:DbColumnName="passengerAddress" msprop:FriendlyName="passengerAddress" minOccurs="0">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="50" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:element>
+                  <xs:element name="startdate" msprop:design-time-name="af942f13-6233-4849-8073-3e3a01526f09" msprop:DbColumnName="startdate" msprop:FriendlyName="startdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="enddate" msprop:design-time-name="e5741d2b-ea96-4521-ab50-3613cdff0311" msprop:DbColumnName="enddate" msprop:FriendlyName="enddate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="insertdate" msprop:design-time-name="a15d89dd-1988-43ad-a835-8a5e9babad7e" msprop:DbColumnName="insertdate" msprop:FriendlyName="insertdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="modifydate" msprop:design-time-name="b165039c-29db-4c59-8219-0cd484336328" msprop:DbColumnName="modifydate" msprop:FriendlyName="modifydate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="accm_txn_create_time" msprop:design-time-name="cc71c867-f892-425a-9855-2d2ba6eea185" msprop:DbColumnName="accm_txn_create_time" msprop:FriendlyName="accm_txn_create_time" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="accm_txn_complete_time" msprop:design-time-name="4d2ac398-4692-4f97-8a13-17dc73ca1822" msprop:DbColumnName="accm_txn_complete_time" msprop:FriendlyName="accm_txn_complete_time" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="txn_process_time_hours" msprop:design-time-name="f1d83062-ffb9-403f-9c65-d3f7fdc24154" msprop:DbColumnName="txn_process_time_hours" msprop:FriendlyName="txn_process_time_hours" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+        <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_DimFlight" />
+          <xs:field xpath="FlightIDSK" />
+        </xs:unique>
+        <xs:unique name="dbo_DimFoodCategory_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_DimFoodCategory" />
+          <xs:field xpath="CategoryIDSK" />
+        </xs:unique>
+        <xs:unique name="dbo_DimFoodItem_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_DimFoodItem" />
+          <xs:field xpath="FoodIDSK" />
+        </xs:unique>
+        <xs:unique name="dbo_DimSatisfaction_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_DimSatisfaction" />
+          <xs:field xpath="SatisfactionIDSK" />
+        </xs:unique>
+        <xs:unique name="dbo_FactPassengers_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+          <xs:selector xpath=".//dbo_FactPassengers" />
+          <xs:field xpath="PassengerIDSK" />
+        </xs:unique>
+        <xs:keyref name="FK__FactPasse__Fligh__534D60F1" refer="Constraint1">
+          <xs:selector xpath=".//dbo_FactPassengers" />
+          <xs:field xpath="FlightKey" />
+        </xs:keyref>
+        <xs:keyref name="FK__FactPasse__FoodK__5441852A" refer="dbo_DimFoodItem_Constraint1">
+          <xs:selector xpath=".//dbo_FactPassengers" />
+          <xs:field xpath="FoodKey" />
+        </xs:keyref>
+        <xs:keyref name="FK__FactPasse__Satis__5535A963" refer="dbo_DimSatisfaction_Constraint1">
+          <xs:selector xpath=".//dbo_FactPassengers" />
+          <xs:field xpath="SatisfactionKey" />
+        </xs:keyref>
+        <xs:keyref name="FK__DimFoodIt__Categ__29572725" refer="dbo_DimFoodCategory_Constraint1">
+          <xs:selector xpath=".//dbo_DimFoodItem" />
+          <xs:field xpath="Categorykey" />
+        </xs:keyref>
+      </xs:element>
+    </xs:schema>
+    <DSV_x0020_Assignment1DW xmlns="" />
+  </Schema>
+</DataSourceView>
