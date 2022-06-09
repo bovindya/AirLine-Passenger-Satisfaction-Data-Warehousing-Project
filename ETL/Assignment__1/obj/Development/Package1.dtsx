@@ -1,0 +1,2202 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/14/2022 2:47:31 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-CN1T8LO"
+  DTS:CreatorName="DESKTOP-CN1T8LO\IMAKA"
+  DTS:DTSID="{33042580-EAB2-47AC-8385-998FB67E7334}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{25799963-4386-4E38-BC2B-B3F4F7F42EAA}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-CN1T8LO\SQLEXPRESS.Assignment1DW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{28C62145-B6C1-482C-B06C-807901E01D40}"
+      DTS:ObjectName="DESKTOP-CN1T8LO\SQLEXPRESS.Assignment1DW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-CN1T8LO\SQLEXPRESS;Initial Catalog=Assignment1DW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{AF7E2CA3-16D2-4FAD-BE2A-E37503317F8C}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="C:\Users\IMAKA\Downloads\DWBI\accumulatd.csv">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="PassengerID"
+              DTS:DTSID="{5D38D204-BC26-4040-8A65-D168C0652D65}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="135"
+              DTS:TextQualified="True"
+              DTS:ObjectName="accm_txn_complete_time"
+              DTS:DTSID="{C8E9AB80-3DE2-48D0-9A55-AB326EFA282A}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\accumulative PassengerFact"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{BA6BCBBC-418B-4A65-ABA5-0EA69AD0D250}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="accumulative PassengerFact"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\accumulative PassengerFact\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\accumulative PassengerFact\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Derived Column.Inputs[Derived Column Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_create_time]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Derived Column.Inputs[Derived Column Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_complete_time]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\accumulative PassengerFact\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Output].Columns[process time]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Output].Columns[process time]"
+                      name="process time"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[DATEDIFF]("hh",#{Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_create_time]},#{Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_complete_time]})</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">DATEDIFF("hh",accm_txn_create_time,accm_txn_complete_time)</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\accumulative PassengerFact\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative PassengerFact\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\accumulative PassengerFact\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].Columns[PassengerID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PassengerID]"
+                      lineageId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].Columns[PassengerID]"
+                      name="PassengerID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[accm_txn_complete_time]"
+                      lineageId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[PassengerID]"
+                      dataType="i4"
+                      name="PassengerID" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative PassengerFact\Merge Join 1"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">1</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[PassengerAlternateID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerAlternateID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[PassengerAlternateID]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[age]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="age"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[age]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[Gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Gender"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[passengerclass]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="passengerclass"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengerclass]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[passengertype]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="passengertype"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengertype]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[typeoftravel]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="typeoftravel"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[typeoftravel]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[FlightKey]"
+                      cachedDataType="i4"
+                      cachedName="FlightKey"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[FlightKey]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[FoodKey]"
+                      cachedDataType="i4"
+                      cachedName="FoodKey"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[FoodKey]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[SatisfactionKey]"
+                      cachedDataType="i4"
+                      cachedName="SatisfactionKey"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[SatisfactionKey]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[passengerAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="passengerAddress"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengerAddress]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[startdate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="startdate"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[startdate]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[enddate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="enddate"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[enddate]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[modifydate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="modifydate"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[modifydate]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[txn_process_time_hours]"
+                      cachedDataType="i4"
+                      cachedName="txn_process_time_hours"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[txn_process_time_hours]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[insertdate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="insertdate"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[insertdate]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[PassengerIDSK]"
+                      cachedDataType="i4"
+                      cachedName="PassengerIDSK"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[PassengerIDSK]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Right Input].Columns[PassengerID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerID"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\accumulative PassengerFact\Sort 1.Outputs[Sort Output].Columns[PassengerID]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Right Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\accumulative PassengerFact\Sort 1.Outputs[Sort Output].Columns[accm_txn_complete_time]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[age]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[age]"
+                      name="age">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[age]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[Gender]"
+                      name="Gender">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[Gender]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[passengerclass]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[passengerclass]"
+                      name="passengerclass">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[passengerclass]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[passengertype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[passengertype]"
+                      name="passengertype">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[passengertype]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[typeoftravel]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[typeoftravel]"
+                      name="typeoftravel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[typeoftravel]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[FlightKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[FlightKey]"
+                      name="FlightKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[FlightKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[FoodKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[FoodKey]"
+                      name="FoodKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[FoodKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[SatisfactionKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[SatisfactionKey]"
+                      name="SatisfactionKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[SatisfactionKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[passengerAddress]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[passengerAddress]"
+                      name="passengerAddress">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[passengerAddress]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[startdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[startdate]"
+                      name="startdate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[startdate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[enddate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[enddate]"
+                      name="enddate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[enddate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[modifydate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[modifydate]"
+                      name="modifydate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[modifydate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[txn_process_time_hours]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[insertdate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Right Input].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[PassengerID]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[PassengerID]"
+                      name="PassengerID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Right Input].Columns[PassengerID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[PassengerIDSK]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[PassengerIDSK]"
+                      name="PassengerIDSK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input].Columns[PassengerIDSK]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative PassengerFact\OLE DB Command"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="OLE DB Command"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">UPDATE [dbo].[FactPassengers] SET [accm_txn_complete_time] = ?, [txn_process_time_hours] =? WHERE [PassengerAlternateID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\accumulative PassengerFact\OLE DB Command.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-CN1T8LO\SQLEXPRESS.Assignment1DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-CN1T8LO\SQLEXPRESS.Assignment1DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[accm_txn_complete_time]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].Columns[process time]"
+                      cachedDataType="i4"
+                      cachedName="process time"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Output].Columns[process time]" />
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].Columns[PassengerID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerID"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output].Columns[PassengerID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="dbTimeStamp"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative PassengerFact\OLE DB Command.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\accumulative PassengerFact\OLE DB Command.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Command.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative PassengerFact\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactPassengers]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\accumulative PassengerFact\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-CN1T8LO\SQLEXPRESS.Assignment1DW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-CN1T8LO\SQLEXPRESS.Assignment1DW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[PassengerIDSK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PassengerIDSK]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[PassengerIDSK]"
+                      name="PassengerIDSK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[PassengerAlternateID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PassengerAlternateID]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[PassengerAlternateID]"
+                      name="PassengerAlternateID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[age]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[age]"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[age]"
+                      name="age"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengerclass]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[passengerclass]"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengerclass]"
+                      name="passengerclass"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengertype]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[passengertype]"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengertype]"
+                      name="passengertype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[typeoftravel]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[typeoftravel]"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[typeoftravel]"
+                      name="typeoftravel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[FlightKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FlightKey]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[FlightKey]"
+                      name="FlightKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[FoodKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FoodKey]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[FoodKey]"
+                      name="FoodKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[SatisfactionKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SatisfactionKey]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[SatisfactionKey]"
+                      name="SatisfactionKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengerAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[passengerAddress]"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengerAddress]"
+                      name="passengerAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[startdate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[startdate]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[startdate]"
+                      name="startdate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[enddate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[enddate]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[enddate]"
+                      name="enddate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifydate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifydate]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifydate]"
+                      name="modifydate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[txn_process_time_hours]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_create_time]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[insertdate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[insertdate]"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[insertdate]"
+                      name="insertdate"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PassengerIDSK]"
+                      dataType="i4"
+                      name="PassengerIDSK" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[PassengerAlternateID]"
+                      dataType="i4"
+                      name="PassengerAlternateID" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[age]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="age" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[passengerclass]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="passengerclass" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[passengertype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="passengertype" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[typeoftravel]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="typeoftravel" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FlightKey]"
+                      dataType="i4"
+                      name="FlightKey" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[FoodKey]"
+                      dataType="i4"
+                      name="FoodKey" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[SatisfactionKey]"
+                      dataType="i4"
+                      name="SatisfactionKey" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[passengerAddress]"
+                      dataType="wstr"
+                      length="50"
+                      name="passengerAddress" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[startdate]"
+                      dataType="dbTimeStamp"
+                      name="startdate" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[enddate]"
+                      dataType="dbTimeStamp"
+                      name="enddate" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[insertdate]"
+                      dataType="dbTimeStamp"
+                      name="insertdate" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[modifydate]"
+                      dataType="dbTimeStamp"
+                      name="modifydate" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_create_time" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      name="accm_txn_complete_time" />
+                    <externalMetadataColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[txn_process_time_hours]"
+                      dataType="i4"
+                      name="txn_process_time_hours" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PassengerIDSK]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PassengerIDSK]"
+                      name="PassengerIDSK" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PassengerAlternateID]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[PassengerAlternateID]"
+                      name="PassengerAlternateID" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[age]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[age]"
+                      name="age" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[passengerclass]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[passengerclass]"
+                      name="passengerclass" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[passengertype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[passengertype]"
+                      name="passengertype" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[typeoftravel]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[typeoftravel]"
+                      name="typeoftravel" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FlightKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FlightKey]"
+                      name="FlightKey" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FoodKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[FoodKey]"
+                      name="FoodKey" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SatisfactionKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[SatisfactionKey]"
+                      name="SatisfactionKey" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[passengerAddress]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[passengerAddress]"
+                      name="passengerAddress" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[startdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[startdate]"
+                      name="startdate" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[enddate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[enddate]"
+                      name="enddate" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifydate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[modifydate]"
+                      name="modifydate" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time" />
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[insertdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[insertdate]"
+                      name="insertdate" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative PassengerFact\Sort"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[PassengerIDSK]"
+                      cachedDataType="i4"
+                      cachedName="PassengerIDSK"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[PassengerIDSK]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[PassengerAlternateID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerAlternateID"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[PassengerAlternateID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[age]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="age"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[age]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[Gender]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Gender"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[passengerclass]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="passengerclass"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengerclass]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[passengertype]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="passengertype"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengertype]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[typeoftravel]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="typeoftravel"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[typeoftravel]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[FlightKey]"
+                      cachedDataType="i4"
+                      cachedName="FlightKey"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[FlightKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[FoodKey]"
+                      cachedDataType="i4"
+                      cachedName="FoodKey"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[FoodKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[SatisfactionKey]"
+                      cachedDataType="i4"
+                      cachedName="SatisfactionKey"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[SatisfactionKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[passengerAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="passengerAddress"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengerAddress]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[startdate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="startdate"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[startdate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[enddate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="enddate"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[enddate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[modifydate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="modifydate"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifydate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[txn_process_time_hours]"
+                      cachedDataType="i4"
+                      cachedName="txn_process_time_hours"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[accm_txn_create_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_create_time"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input].Columns[insertdate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="insertdate"
+                      lineageId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[insertdate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[PassengerIDSK]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[PassengerIDSK]"
+                      name="PassengerIDSK">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[PassengerIDSK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[PassengerAlternateID]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[PassengerAlternateID]"
+                      name="PassengerAlternateID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[PassengerAlternateID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[age]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[age]"
+                      name="age">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[age]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[Gender]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[Gender]"
+                      name="Gender">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[Gender]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengerclass]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengerclass]"
+                      name="passengerclass">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengerclass]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengertype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengertype]"
+                      name="passengertype">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengertype]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[typeoftravel]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[typeoftravel]"
+                      name="typeoftravel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[typeoftravel]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[FlightKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[FlightKey]"
+                      name="FlightKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[FlightKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[FoodKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[FoodKey]"
+                      name="FoodKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[FoodKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[SatisfactionKey]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[SatisfactionKey]"
+                      name="SatisfactionKey">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[SatisfactionKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengerAddress]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[passengerAddress]"
+                      name="passengerAddress">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[passengerAddress]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[startdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[startdate]"
+                      name="startdate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[startdate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[enddate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[enddate]"
+                      name="enddate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[enddate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[modifydate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[modifydate]"
+                      name="modifydate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[modifydate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[txn_process_time_hours]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[txn_process_time_hours]"
+                      name="txn_process_time_hours">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[txn_process_time_hours]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[accm_txn_create_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[accm_txn_create_time]"
+                      name="accm_txn_create_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[accm_txn_create_time]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[insertdate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output].Columns[insertdate]"
+                      name="insertdate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output].Columns[insertdate]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\accumulative PassengerFact\Sort 1"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="Sort 1"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\accumulative PassengerFact\Sort 1.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort 1.Inputs[Sort Input].Columns[PassengerID]"
+                      cachedDataType="i4"
+                      cachedName="PassengerID"
+                      lineageId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].Columns[PassengerID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\accumulative PassengerFact\Sort 1.Inputs[Sort Input].Columns[accm_txn_complete_time]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="accm_txn_complete_time"
+                      lineageId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\accumulative PassengerFact\Sort 1.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort 1.Outputs[Sort Output].Columns[PassengerID]"
+                      dataType="i4"
+                      lineageId="Package\accumulative PassengerFact\Sort 1.Outputs[Sort Output].Columns[PassengerID]"
+                      name="PassengerID"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].Columns[PassengerID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\accumulative PassengerFact\Sort 1.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\accumulative PassengerFact\Sort 1.Outputs[Sort Output].Columns[accm_txn_complete_time]"
+                      name="accm_txn_complete_time">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output].Columns[accm_txn_complete_time]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\accumulative PassengerFact.Paths[Derived Column Output]"
+              endId="Package\accumulative PassengerFact\OLE DB Command.Inputs[OLE DB Command Input]"
+              name="Derived Column Output"
+              startId="Package\accumulative PassengerFact\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\accumulative PassengerFact.Paths[Flat File Source Output]"
+              endId="Package\accumulative PassengerFact\Sort 1.Inputs[Sort Input]"
+              name="Flat File Source Output"
+              startId="Package\accumulative PassengerFact\Flat File Source.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\accumulative PassengerFact.Paths[Merge Join Output]"
+              endId="Package\accumulative PassengerFact\Derived Column.Inputs[Derived Column Input]"
+              name="Merge Join Output"
+              startId="Package\accumulative PassengerFact\Merge Join 1.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\accumulative PassengerFact.Paths[OLE DB Source Output]"
+              endId="Package\accumulative PassengerFact\Sort.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\accumulative PassengerFact\OLE DB Source.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\accumulative PassengerFact.Paths[Sort Output]"
+              endId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\accumulative PassengerFact\Sort.Outputs[Sort Output]" />
+            <path
+              refId="Package\accumulative PassengerFact.Paths[Sort Output1]"
+              endId="Package\accumulative PassengerFact\Merge Join 1.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\accumulative PassengerFact\Sort 1.Outputs[Sort Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="211,42"
+          Id="Package\accumulative PassengerFact"
+          TopLeft="101,154" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\accumulative PassengerFact">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\accumulative PassengerFact\Flat File Source"
+          TopLeft="329,32" />
+        <NodeLayout
+          Size="150,42"
+          Id="Package\accumulative PassengerFact\OLE DB Source"
+          TopLeft="142,42" />
+        <NodeLayout
+          Size="98,42"
+          Id="Package\accumulative PassengerFact\Sort"
+          TopLeft="170.5,156.5" />
+        <NodeLayout
+          Size="107,42"
+          Id="Package\accumulative PassengerFact\Sort 1"
+          TopLeft="350,145" />
+        <EdgeLayout
+          Id="Package\accumulative PassengerFact.Paths[Flat File Source Output]"
+          TopLeft="404,74">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,71"
+              Start="0,0"
+              End="0,63.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\accumulative PassengerFact.Paths[OLE DB Source Output]"
+          TopLeft="218.25,84">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,72.5"
+              Start="0,0"
+              End="0,65">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="139,42"
+          Id="Package\accumulative PassengerFact\Merge Join 1"
+          TopLeft="256,243" />
+        <EdgeLayout
+          Id="Package\accumulative PassengerFact.Paths[Sort Output]"
+          TopLeft="219.5,198.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="84.1666666666667,44.5"
+              Start="0,0"
+              End="84.1666666666667,37">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.3961593172119" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.3961593172119"
+                    Point2="0,26.3961593172119"
+                    Point3="4,26.3961593172119" />
+                  <mssgle:LineSegment
+                    End="80.1666666666667,26.3961593172119" />
+                  <mssgle:CubicBezierSegment
+                    Point1="80.1666666666667,26.3961593172119"
+                    Point2="84.1666666666667,26.3961593172119"
+                    Point3="84.1666666666667,30.3961593172119" />
+                  <mssgle:LineSegment
+                    End="84.1666666666667,37" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\accumulative PassengerFact.Paths[Sort Output1]"
+          TopLeft="403.5,187">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-56.1666666666667,56"
+              Start="0,0"
+              End="-56.1666666666667,48.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.2176386913229" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.2176386913229"
+                    Point2="0,33.2176386913229"
+                    Point3="-4,33.2176386913229" />
+                  <mssgle:LineSegment
+                    End="-52.1666666666667,33.2176386913229" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-52.1666666666667,33.2176386913229"
+                    Point2="-56.1666666666667,33.2176386913229"
+                    Point3="-56.1666666666667,37.2176386913229" />
+                  <mssgle:LineSegment
+                    End="-56.1666666666667,48.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="154,42"
+          Id="Package\accumulative PassengerFact\Derived Column"
+          TopLeft="251,335" />
+        <EdgeLayout
+          Id="Package\accumulative PassengerFact.Paths[Merge Join Output]"
+          TopLeft="326.75,285">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="166,42"
+          Id="Package\accumulative PassengerFact\OLE DB Command"
+          TopLeft="256,452" />
+        <EdgeLayout
+          Id="Package\accumulative PassengerFact.Paths[Derived Column Output]"
+          TopLeft="328,377">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11,75"
+              Start="0,0"
+              End="11,67.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.5"
+                    Point2="0,37.5"
+                    Point3="4,37.5" />
+                  <mssgle:LineSegment
+                    End="7,37.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7,37.5"
+                    Point2="11,37.5"
+                    Point3="11,41.5" />
+                  <mssgle:LineSegment
+                    End="11,67.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\accumulative PassengerFact\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
